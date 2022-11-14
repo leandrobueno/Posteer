@@ -2,6 +2,7 @@ using Api.Services;
 using API.Data;
 using API.Extensions;
 using API.Helpers;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AccountContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddSingleton<TokenService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+builder.Services.AddSingleton<EmailSender>();
 
 builder.Services.AddAccountServices(builder.Configuration);
 

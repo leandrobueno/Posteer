@@ -22,5 +22,6 @@ namespace API.Models.Account
     [Required(ErrorMessage = "Confirm password is required.")]
     [Compare("Password", ErrorMessage = "The confirm password must match with the password.")]
     public string ConfirmPassword { get; set; } = string.Empty;
+    public bool RememberMe { get; set; }
   }
 }
