@@ -48,5 +48,17 @@ namespace API.Controllers
       return Ok(item);
     }
 
+    [HttpGet(Name = "GetAll")]
+    public async Task<ActionResult<Response<ItemToReturn>>> GetAll()
+    {
+      var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+      if (user == null) return BadRequest("User not found. Please, login and try again with a valid user.");
+      var item = await _repo.GetAll(Guid.Parse(user.Id));
+
+      if (!item.Success) return NotFound(item);
+
+      return Ok(item);
+    }
+
   }
 }

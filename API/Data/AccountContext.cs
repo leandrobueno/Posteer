@@ -13,6 +13,6 @@ namespace API.Data
     {
     }
 
-    public DbSet<ToDoItem> ToDoItems { get; set; }
+    public DbSet<ToDoItem> ToDoItems { get; set; } = null!;
   }
 }

@@ -7,6 +7,7 @@ using API.Interfaces;
 using API.Models;
 using API.Models.ToDo;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository
 {
@@ -66,6 +67,30 @@ namespace API.Repository
         Success = true,
         Message = null,
         Data = _mapper.Map<ItemToReturn>(item)
+      };
+    }
+
+    public async Task<Response<List<ItemToReturn>>> GetAll(Guid id)
+    {
+      var item = await _context.ToDoItems.Where(x => x.UserId == id).ToListAsync();
+
+      if (item == null)
+      {
+        return new Response<List<ItemToReturn>>
+        {
+          Code = 404,
+          Success = false,
+          Message = "Found no items for user.",
+          Data = null
+        };
+      }
+
+      return new Response<List<ItemToReturn>>
+      {
+        Code = 200,
+        Success = true,
+        Message = null,
+        Data = _mapper.Map<List<ItemToReturn>>(item)
       };
     }
   }
