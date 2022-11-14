@@ -24,7 +24,7 @@ namespace API.Services
       var plainText = messageBody;
       var html = messageBody;
       var msg = MailHelper.CreateSingleEmail(from, to, subject, plainText, html);
-      var response = await client.SendEmailAsync(msg);
+      _ = await client.SendEmailAsync(msg);
     }
   }
 }

@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Models.Account;
+using API.Models.ToDo;
 using AutoMapper;
 
 namespace API.Helpers
@@ -13,6 +10,8 @@ namespace API.Helpers
     {
       CreateMap<UserToRegister, ApplicationUser>();
       CreateMap<ApplicationUser, UserToReturn>();
+      CreateMap<ItemToCreate, ToDoItem>();
+      CreateMap<ToDoItem, ItemToReturn>();
     }
   }
 }

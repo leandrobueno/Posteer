@@ -13,7 +13,7 @@ namespace API.Extensions
     {
       services.AddIdentity<ApplicationUser, IdentityRole>
           (x => x.SignIn.RequireConfirmedAccount = true)
-          .AddEntityFrameworkStores<AccountContext>()
+          .AddEntityFrameworkStores<DataContext>()
           .AddSignInManager<SignInManager<ApplicationUser>>()
           .AddDefaultTokenProviders();
       services.AddAuthentication(x =>

@@ -2,6 +2,8 @@ using Api.Services;
 using API.Data;
 using API.Extensions;
 using API.Helpers;
+using API.Interfaces;
+using API.Repository;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AccountContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddSingleton<TokenService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddSingleton<EmailSender>();
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 builder.Services.AddAccountServices(builder.Configuration);
 
@@ -27,6 +30,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
