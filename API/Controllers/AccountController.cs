@@ -55,7 +55,7 @@ namespace API.Controllers
 
       await _emailSender.SendEmail(user.Email, "Verify Posteer email", messageBody);
 
-      if (_host.IsDevelopment()) await VerifyEmail(token, user.Email);
+      await VerifyEmail(token, user.Email);
 
       return CreatedAtRoute("Register", new UserToReturn
       {
@@ -95,7 +95,7 @@ namespace API.Controllers
       var verifyUrl = $"{origin}/confirm/?token={token}&email={user.Email}";
       var messageBody = $"<p>Please click the below link to verify your email address:</p><p><a href='{verifyUrl}'>Verify email</a></p>";
 
-      await _emailSender.SendEmail(user.Email, "Verify FinancialChat email", messageBody);
+      await _emailSender.SendEmail(user.Email, "Verify Posteer email", messageBody);
 
       return Ok("Email sent");
     }
