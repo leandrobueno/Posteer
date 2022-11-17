@@ -5,6 +5,8 @@ using API.Helpers;
 using API.Interfaces;
 using API.Repository;
 using API.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,16 +39,13 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseDefaultFiles();
+// app.UseHttpsRedirection();
+app.UseForwardedHeaders();
 app.UseStaticFiles();
-
+app.UseRouting();
 app.UseCors();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
@@ -65,5 +64,14 @@ catch (Exception ex)
   var logger = app.Services.GetRequiredService<ILogger<Program>>();
   logger.LogError(ex, "An error occured during migration");
 }
+
+app.UseSpa(spa =>
+{
+  if (builder.Environment.IsDevelopment())
+  {
+    spa.Options.SourcePath = "../Client/dist";
+    spa.UseProxyToSpaDevelopmentServer("http://127.0.0.1:5173/");
+  }
+});
 
 app.Run();
