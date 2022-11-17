@@ -9,7 +9,7 @@ function Create() {
   const [description, setDescription] = useState("");
   const [duoDate, setDuoDate] = useState(new Date);
   const { setItem } = useContext(ItemsContext);
-  const API_URL = "http://localhost:5191/api/todo";
+  const API_URL = "/api/todo";
 
   axios.interceptors.request.use((config) => {
     const token = localStorage.getItem("user");

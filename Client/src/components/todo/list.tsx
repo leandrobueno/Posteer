@@ -9,7 +9,7 @@ import Item from "./item";
 export default function List() {
   const { items, setItemList } = useContext(ItemsContext);
 
-  const API_URL = "http://localhost:5191/api/todo";
+  const API_URL = "/api/todo";
 
   axios.interceptors.request.use((config) => {
     const token = localStorage.getItem("user");
