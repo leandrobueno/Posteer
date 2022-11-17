@@ -50,4 +50,20 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
+try
+{
+  using var serviceScope = app.Services.CreateScope();
+  var context = serviceScope.ServiceProvider.GetService<DataContext>()!;
+  await context.Database.MigrateAsync();
+  yvar logger = serviceScope.ServiceProvider.GetService<ILogger<Program>>()!;
+  logger.LogInformation("Database seeding complete!");
+
+}
+catch (Exception ex)
+{
+
+  var logger = app.Services.GetRequiredService<ILogger<Program>>();
+  logger.LogError(ex, "An error occured during migration");
+}
+
 app.Run();
