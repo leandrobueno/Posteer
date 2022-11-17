@@ -13,5 +13,6 @@ namespace API.Interfaces
     Task<Response<ItemToReturn>> Create(ItemToCreate item);
     Task<Response<ItemToReturn>> Get(Guid id);
     Task<Response<List<ItemToReturn>>> GetAll(Guid id);
+    Task<Response<string>> Delete(Guid id);
   }
 }

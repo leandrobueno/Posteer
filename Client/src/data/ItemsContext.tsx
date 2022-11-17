@@ -6,12 +6,14 @@ interface IItemsContext {
   items: IToDoItem[];
   setItem: (item: IToDoItem) => void;
   setItemList: (item: IToDoItem[]) => void;
+  removeItem: (id: string) => void;
 }
 
 const defaultState: IItemsContext = {
   items: new Array<IToDoItem>,
   setItem: (item: IToDoItem) => null,
-  setItemList: (item: IToDoItem[]) => null
+  setItemList: (item: IToDoItem[]) => null,
+  removeItem: (id: string) => null
 };
 
 const ItemsContext = createContext<IItemsContext>(defaultState);
@@ -31,6 +33,10 @@ function useItemsProvider() {
     setItems(items => [item, ...items])
   }
 
+  const removeItem = (id: string) => {
+    setItems(items.filter(item => item.id !== id))
+  }
+
   const setItemList = (item: IToDoItem[]) => {
     setItems(item);
   }
@@ -38,6 +44,7 @@ function useItemsProvider() {
   return {
     items,
     setItem,
-    setItemList
+    setItemList,
+    removeItem
   };
 }

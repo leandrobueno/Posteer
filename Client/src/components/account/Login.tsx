@@ -1,5 +1,6 @@
 import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { Button, Container, FloatingLabel, Form } from "react-bootstrap";
+import { Redirect } from "react-router";
 import AuthContext from "../../data/AuthContext";
 import { IUserLogin } from "../../models/Account/IUserLogin";
 
@@ -18,6 +19,8 @@ export default function Login() {
     };
 
     login(user);
+
+
   };
 
   return (
@@ -39,7 +42,7 @@ export default function Login() {
             </Button>
           </Form>
         ) : (
-          <p>Login successful, chose a room to start chatting!</p>
+          <Redirect to="tasks/list" />
         )}
       </div>
     </div>

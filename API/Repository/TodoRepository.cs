@@ -95,5 +95,41 @@ namespace API.Repository
         Data = _mapper.Map<List<ItemToReturn>>(item)
       };
     }
+
+    public async Task<Response<string>> Delete(Guid id)
+    {
+      var item = await _context.ToDoItems.FindAsync(id);
+
+      if (item == null)
+      {
+        return new Response<string>
+        {
+          Code = 404,
+          Success = false,
+          Message = "Item not found or already deleted.",
+          Data = null
+        };
+      }
+
+      _context.ToDoItems.Remove(item);
+      if (await _context.SaveChangesAsync() <= 0)
+      {
+        return new Response<string>
+        {
+          Code = 501,
+          Success = false,
+          Message = "Error deleting item, please try again.",
+          Data = null
+        };
+      }
+
+      return new Response<string>
+      {
+        Code = 200,
+        Success = true,
+        Message = null,
+        Data = item.Id.ToString()
+      };
+    }
   }
 }

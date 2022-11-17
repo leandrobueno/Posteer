@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Container, ListGroup } from "react-bootstrap";
+import { Col, Container, ListGroup } from "react-bootstrap";
 import ItemsContext from "../../data/ItemsContext";
 import { IToDoItem } from "../../models/todo/IToDoItem";
 import Create from "./create";
@@ -40,15 +40,18 @@ export default function List() {
   else {
     return (
       <Container>
+
         <Create></Create>
         <br />
-        <ListGroup>
-          <ListGroup.Item>
-            {items.map(function (item, i) {
-              return <Item item={item} key={i}></Item>
-            })}
-          </ListGroup.Item>
-        </ListGroup>
+        <Col md={6}>
+          <ListGroup>
+            <ListGroup.Item>
+              {items.map(function (item, i) {
+                return <Item item={item} key={i}></Item>
+              })}
+            </ListGroup.Item>
+          </ListGroup>
+        </Col>
       </Container>
     );
   }

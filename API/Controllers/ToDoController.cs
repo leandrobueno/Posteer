@@ -60,5 +60,17 @@ namespace API.Controllers
       return Ok(item);
     }
 
+    [HttpDelete("{id}", Name = "Delete")]
+    public async Task<ActionResult<Response<ItemToReturn>>> Delete(string id)
+    {
+      var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+      if (user == null) return BadRequest("User not found. Please, login and try again with a valid user.");
+      var item = await _repo.Delete(Guid.Parse(id));
+
+      if (!item.Success) return NotFound(item);
+
+      return Ok(item);
+    }
+
   }
 }

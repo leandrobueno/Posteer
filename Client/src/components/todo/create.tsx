@@ -42,7 +42,7 @@ function Create() {
             <Form.Control id="text" type="text" placeholder="Activity description" onChange={(e) => setDescription(e.target.value)}></Form.Control>
           </FloatingLabel>
           <Row>
-            <Col>
+            <Col sm={1}>
               <Button variant="primary" type="submit">
                 Create
               </Button>
