@@ -55,7 +55,7 @@ try
   using var serviceScope = app.Services.CreateScope();
   var context = serviceScope.ServiceProvider.GetService<DataContext>()!;
   await context.Database.MigrateAsync();
-  yvar logger = serviceScope.ServiceProvider.GetService<ILogger<Program>>()!;
+  var logger = serviceScope.ServiceProvider.GetService<ILogger<Program>>()!;
   logger.LogInformation("Database seeding complete!");
 
 }
