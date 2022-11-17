@@ -85,6 +85,8 @@ namespace API.Repository
         };
       }
 
+      item = item.OrderByDescending(x => x.CreatedAt).ToList();
+
       return new Response<List<ItemToReturn>>
       {
         Code = 200,
