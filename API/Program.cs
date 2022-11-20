@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
   options.AddDefaultPolicy(
       policy =>
       {
-        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://127.0.0.1:5173");
+        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().AllowAnyOrigin();
       });
 });
 
@@ -67,7 +67,7 @@ app.UseSpa(spa =>
   if (builder.Environment.IsDevelopment())
   {
     spa.Options.SourcePath = "../Client/dist";
-    spa.UseProxyToSpaDevelopmentServer("http://127.0.0.1:5173/");
+    // spa.UseProxyToSpaDevelopmentServer("http://127.0.0.1:5173/");
   }
 });
 
