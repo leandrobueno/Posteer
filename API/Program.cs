@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
   options.AddDefaultPolicy(
       policy =>
       {
-        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().AllowAnyOrigin();
+        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://127.0.0.1:3000", "https://proud-glacier-0ae17c610.2.azurestaticapps.net/");
       });
 });
 
