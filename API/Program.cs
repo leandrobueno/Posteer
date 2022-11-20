@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
   options.AddDefaultPolicy(
       policy =>
       {
-        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000", "https://habits-fiap.azurewebsites.net/");
+        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000", "https://habits-r8zcfxooi-leandrobueno.vercel.app//");
       });
 });
 
